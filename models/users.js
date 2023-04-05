@@ -8,9 +8,20 @@ const usersSchema = new Schema(
             required: true,
             trim: true,
         },
-        email: {},
-        thoughts:[{}],
-        friends: [{}],
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+            match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/],
+        },
+        thoughts:[{ 
+            type: Schema.Types.ObjectId,
+            ref: 'Thoughts'
+        }],
+        friends: [{
+            type: Schema.Types.ObjectId,
+        ref: 'Users'
+        }],
     },
     {
         toJSON: {
@@ -21,6 +32,12 @@ const usersSchema = new Schema(
     }
 )
 
+// get total count of friends
+usersSchema.virtual('friendCount').get(function() {
+    return this.friends.length;
+})
 
 
-module.export = users;
+const Users = model('Users', usersSchema)
+
+module.export = Users;
