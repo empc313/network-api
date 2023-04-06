@@ -29,7 +29,30 @@ try {
       res.status(500).json(err);
     }
   },
+//Update Thought
+async updateThoughts(req, res) {
+    try {
+      const thoughts = await Thoughts.findOneAndUpdate(req.params.thoughtId, req.body, {
+        new: true,
+      });
+      if (!thoughts) {
+        res.status(404).json({ message: 'Thought not found' });
+      } else {
+        res.json(thoughts);
+      }
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
   //Delete Thought
+  async deleteThoughts(req,res) {
+    try {
+        const thoughts = await Thoughts.findOneAndUpdate({_id:req.params.thoughtId});
+        res.status(200).json(thoughts);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+  },
   //Create Reaction
   async addReaction(req, res) {
     try {

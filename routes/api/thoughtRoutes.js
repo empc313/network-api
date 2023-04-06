@@ -18,10 +18,10 @@ router.route('/').get(getAllThoughts).post(createThoughts);
 router.route('/:id').get(getThoughtsById)
 
 //UPDATE Thought
-// .put(updateThoughts)
+.put(updateThoughts)
 
 //DELETE Thought
-// .delete(deleteThoughts);
+.delete(deleteThoughts);
 
 //CREATE Reaction
 router.route("/:thoughtId/reactions").post(addReaction);
