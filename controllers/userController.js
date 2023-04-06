@@ -1,20 +1,36 @@
 
-const { Users, Thoughts } = require("../models");
+const { Users} = require("../models");
+
 
 const userController = {
+  
   // get all users
   getAllUsers(req, res) {
     Users.find({})
-      .populate({
-        path: "friends",
-        select: "-__v",
-      })
-      .select("-__v")
-      .sort({ _id: -1 })
-      .then((dbUserData) => res.json(dbUserData))
-      .catch((err) => {
-        console.log(err);
-        res.sendStatus(400);
-      });
+     .then(userData => res.json(userData))
+     .catch(err => res.status(500).json(err))
   },
+  //Get user by id
+getUserById(req, res) {
+  Users.findById(req.params.userId)
+  .then(userData => res.json(userData))
+  .catch(err => res.status(500).json(err));
+},
+//Create User
+createUsers(req, res) {
+  Users.create(req.body)
+  .then(userData => res.json(userData))
+  .catch(err => res.status(500).json(err));
 }
+
+//Update user 
+
+//Delete User
+
+//Add friend
+
+//Delete friend
+}
+
+
+module.exports = userController
