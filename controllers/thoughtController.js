@@ -17,7 +17,9 @@ async createThoughts(req, res) {
       res.status(500).json(err);
     }
   },
-
+//Delete Thought
+//Create reaction
+//Delete Reaction
 
 
 }
