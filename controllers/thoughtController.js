@@ -1,4 +1,4 @@
-const { Thoughts, Users } = require("../models");
+const { Thoughts, Users, Reaction } = require("../models");
 
 const thoughtController = {
   //GET all Thoughts
@@ -31,7 +31,32 @@ try {
   },
   //Delete Thought
   //Create Reaction
+  async addReaction(req, res) {
+    try {
+      const thoughts = await Thoughts.findOneAndUpdate(
+          {_id:req.params.thoughtId},
+          {$addToSet: {reactions: req.body}},
+          {runValidators: true, new: true}
+      );
+      thoughts ? res.json(thoughts) : res.status(404).json({message: notFound});
+  } catch (e) {
+      res.status(500).json(e);
+  }
+},
   //Delete Reaction
+  async deleteReaction(req, res) {
+    try {
+      const thoughts = await Thoughts.findOneAndUpdate(
+          {_id: req.params.thoughtId},
+          {$pull: {reactions: {reactionId: req.params.reactionId}}},
+          {runValidators: true, new: true}
+      );
+
+      thoughts ? res.json(thoughts) : res.status(404).json({message: notFound});
+  } catch (e) {
+      res.status(500).json(e);
+  }
+},
 };
 
 module.exports = thoughtController;
