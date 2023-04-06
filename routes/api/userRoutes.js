@@ -12,17 +12,13 @@ const {
   } = require('../../controllers/userController');
 
 
-  // GET
+  // GET, PUT, DELETE for users
 router.route('/').get(getAllUsers).post(createUsers);
 router.route('/:userid').get(getUserById)
-
-//PUT
 .put(updateUsers)
-
-//DELETE
 .delete(deleteUser);
 
-// //POST, DELETE
+ //POST, DELETE for friends
 // router.route('/:id/friends/:friendId').post(addFriend).delete(deleteFriend)
 
 

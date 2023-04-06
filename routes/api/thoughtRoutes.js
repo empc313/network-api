@@ -13,18 +13,19 @@ const {
 
 } = require('../../controllers/thoughtController');
 
-//GET
+//GET, POST
 router.route('/').get(getAllThoughts).post(createThoughts);
-// router.route('/:id').get(getThoughtsById)
+router.route('/:id').get(getThoughtsById)
 
-//PUT
+//UPDATE Thought
 // .put(updateThoughts)
 
-//Delete
+//DELETE Thought
 // .delete(deleteThoughts);
 
+//CREATE Reaction
 // router.route("/:thoughtId/reactions").post(addReaction);
-
+//DELETE Reaction
 // router.route("/:thoughtId/reactions/:reactionId").delete(removeReaction);
 
 module.exports = router;

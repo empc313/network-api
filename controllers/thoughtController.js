@@ -8,6 +8,18 @@ const thoughtController = {
       .catch((err) => res.status(500).json(err));
   },
   //GET Thought by id
+  async getThoughtsById(req,res) {
+try {
+    const thoughts = await Thoughts.findById(req.params.id)
+    if (!thoughts) {
+        res.status(404).json({message: "Thought Not Found"});
+    } else {
+        res.json(thoughts);
+    }
+} catch (err) {
+    res.status(500).json(err);
+}
+  },
   //Create Thought
   async createThoughts(req, res) {
     try {
