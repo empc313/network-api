@@ -1,5 +1,14 @@
 # NoSQL: Social Network
 
+## Description
+
+An API for a social network application where users can share thoughts, and react to friends' thoughts
+
+## Usage
+
+mongoose
+express
+
 ## User Story
 
     AS A social media startup
